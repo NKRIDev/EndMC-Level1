@@ -1,0 +1,24 @@
+plugins {
+    id 'java'
+}
+
+group = 'fr.nkri'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    /**
+     * Implémentation de lombok
+     */
+    compileOnly 'org.projectlombok:lombok:1.18.28'
+    annotationProcessor 'org.projectlombok:lombok:1.18.28'
+
+    /**
+     * Implémentation des libs qui se situe à la racine du projet
+     * dans le dossier "libs"
+     */
+    implementation fileTree("libs")
+}

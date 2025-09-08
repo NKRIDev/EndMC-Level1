@@ -1,0 +1,6 @@
+name: ZonePlugin
+main: fr.nkri.zone.ZonePlugin
+author: NKRI
+version: 1.0
+depend:
+  - JAPI
