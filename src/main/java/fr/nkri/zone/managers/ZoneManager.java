@@ -86,7 +86,7 @@ public class ZoneManager {
             return JUtils.color("&cAuncune zone disponible.");
         }
 
-        //NOTE : additione tout les nom des zones et les sépares par une ,
+        //NOTE : additionne tout les nom des zones et les sépares par une ,
         return String.join(", ", this.zones.keySet());
     }
 }
