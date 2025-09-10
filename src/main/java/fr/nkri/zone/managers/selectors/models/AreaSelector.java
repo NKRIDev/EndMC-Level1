@@ -1,4 +1,4 @@
-package fr.nkri.zone.managers.models;
+package fr.nkri.zone.managers.selectors.models;
 
 import fr.nkri.japi.utils.areas.Area;
 import lombok.Getter;

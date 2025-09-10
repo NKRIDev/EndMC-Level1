@@ -5,7 +5,7 @@ import fr.nkri.japi.cmds.ICommand;
 import fr.nkri.japi.cmds.interfaces.Command;
 import fr.nkri.japi.utils.JUtils;
 import fr.nkri.zone.managers.ZoneManager;
-import fr.nkri.zone.managers.models.AreaSelector;
+import fr.nkri.zone.managers.selectors.models.AreaSelector;
 import org.bukkit.entity.Player;
 
 public class ZoneCommand extends ICommand {
@@ -57,7 +57,7 @@ public class ZoneCommand extends ICommand {
                 }
 
                 final String createName = args.getArgs(1);
-                final AreaSelector areaSelector = this.zoneManager.getSelector(player.getUniqueId());
+                final AreaSelector areaSelector = this.zoneManager.getSelectorManager().getSelector(player.getUniqueId());
 
                 if (!areaSelector.canCreate()){
                     player.sendMessage(JUtils.color("&cVous devez sélectionner une zone !"));

@@ -2,7 +2,7 @@ package fr.nkri.zone.events;
 
 import fr.nkri.japi.utils.JUtils;
 import fr.nkri.zone.managers.ZoneManager;
-import fr.nkri.zone.managers.models.PosSelector;
+import fr.nkri.zone.managers.selectors.models.PosSelector;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -50,7 +50,7 @@ public class AreaSelectorEvent implements Listener {
         if(e.getAction() == Action.LEFT_CLICK_BLOCK) {
             //Create a pos1
             final PosSelector pos1 = new PosSelector(clickedBlock.getX(), clickedBlock.getY());
-            this.zoneManager.setFirstPos(player.getUniqueId(), pos1);
+            this.zoneManager.getSelectorManager().setFirstPos(player.getUniqueId(), pos1);
 
             e.setCancelled(true);
             player.sendMessage(JUtils.color("&7[&6&lSELECTOR&7&l] &r&aPos 1 définit en X: %x% - Y: %y%")
@@ -60,7 +60,7 @@ public class AreaSelectorEvent implements Listener {
         else if(e.getAction() == Action.RIGHT_CLICK_BLOCK) {
             //Create a pos2
             final PosSelector pos2 = new PosSelector(clickedBlock.getX(), clickedBlock.getY());
-            this.zoneManager.setSecondPos(player.getUniqueId(), pos2);
+            this.zoneManager.getSelectorManager().setSecondPos(player.getUniqueId(), pos2);
 
             e.setCancelled(true);
             player.sendMessage(JUtils.color("&7[&6&lSELECTOR&7&l] &r&aPos 2 définit en X: %x% - Y: %y%")
