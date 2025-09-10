@@ -3,8 +3,6 @@ package fr.nkri.zone.managers;
 import fr.nkri.japi.utils.areas.Area;
 import lombok.Getter;
 
-import java.util.UUID;
-
 @Getter
 public class Zone {
 

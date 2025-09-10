@@ -21,7 +21,7 @@ public class ZoneCommand extends ICommand {
     //Note: pas de permission pour faciliter le test du plugin
     @Override
     @Command(name = "zone", isConsole = false)
-    public boolean onCommand(CommandArguments args) {
+    public boolean onCommand(final CommandArguments args) {
         final Player player = args.getPlayer();
 
         if(args.length() == 0){
@@ -34,8 +34,8 @@ public class ZoneCommand extends ICommand {
         /**
          * Checking the arguments to verify that the command is working correctly
          */
-        if ((subCommand.equalsIgnoreCase("create") || subCommand.equalsIgnoreCase("remove") || subCommand.equalsIgnoreCase("info"))
-                && args.length() < 2) {
+        if((subCommand.equalsIgnoreCase("create") || subCommand.equalsIgnoreCase("remove") || subCommand.equalsIgnoreCase("info"))
+                && args.length() < 2){
             player.sendMessage(JUtils.color("&cUtilisation: /zone " + subCommand + " <nom>"));
             return false;
         }
@@ -57,7 +57,7 @@ public class ZoneCommand extends ICommand {
 
             //Create zone
             case "create":
-                if (args.length() < 2) {
+                if(args.length() < 2){
                     player.sendMessage(JUtils.color("&cUtilisation: /zone create <nom>"));
                     return false;
                 }
@@ -74,13 +74,16 @@ public class ZoneCommand extends ICommand {
                     return false;
                 }
 
-                if (!areaSelector.canCreate()){
+                if(!areaSelector.canCreate()){
                     player.sendMessage(JUtils.color("&cVous devez sélectionner une zone !"));
                     return false;
                 }
 
                 if(this.zoneManager.zoneExists(createName)){
                     player.sendMessage(JUtils.color("&cUne zone portant ce nom existe déjà."));
+
+                    //Removes a player's selection
+                    this.zoneManager.getSelectorManager().removeSelector(player.getUniqueId());
                     return false;
                 }
 
@@ -90,11 +93,16 @@ public class ZoneCommand extends ICommand {
                 this.zoneManager.createZone(createName, areaSelector.getArea());
                 player.sendMessage(JUtils.color("&aVous venez de créer la zone %name% avec succès !")
                         .replace("%name%", createName));
+
+                /**
+                 * Removed player selection when creating a zone
+                 */
+                this.zoneManager.getSelectorManager().removeSelector(player.getUniqueId());
                 return true;
 
             //Remove zone
             case "remove":
-                if (args.length() < 2) {
+                if(args.length() < 2){
                     player.sendMessage(JUtils.color("&cUtilisation: /zone remove <nom>"));
                     return false;
                 }
@@ -117,7 +125,7 @@ public class ZoneCommand extends ICommand {
 
             //Zone info
             case "info":
-                if (args.length() < 2) {
+                if(args.length() < 2){
                     player.sendMessage(JUtils.color("&cUtilisation: /zone info <nom>"));
                     return false;
                 }

@@ -61,4 +61,12 @@ public class SelectorManager {
     public AreaSelector getSelector(final UUID uuid){
         return this.selectors.get(uuid);
     }
+
+    /**
+     * Removes a player's selection
+     * @param uuid player UUID
+     */
+    public void removeSelector(final UUID uuid){
+        this.selectors.remove(uuid);
+    }
 }
