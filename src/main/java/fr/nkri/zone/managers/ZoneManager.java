@@ -1,10 +1,12 @@
 package fr.nkri.zone.managers;
 
+import fr.nkri.japi.utils.JUtils;
 import fr.nkri.japi.utils.areas.Area;
 import fr.nkri.zone.managers.selectors.SelectorManager;
 import lombok.Getter;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Getter
@@ -62,5 +64,19 @@ public class ZoneManager {
      */
     public boolean zoneExists(final String name){
         return this.zones.containsKey(name);
+    }
+
+    /**
+     * Retrieves a String containing all the zone names
+     *
+     * @return the list of zone names in display format for the player
+     */
+    public String getAllZones(){
+        if(this.zones.isEmpty()){
+            return JUtils.color("&cAuncune zone disponible.");
+        }
+
+        //NOTE : additione tout les nom des zones et les sépares par une ,
+        return String.join(", ", this.zones.keySet());
     }
 }

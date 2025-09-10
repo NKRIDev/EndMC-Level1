@@ -47,7 +47,10 @@ public class ZoneCommand extends ICommand {
 
             //Zone arrays
             case "list":
-                break;
+                player.sendMessage(JUtils.color("&eListes des zones disponibles :"));
+                player.sendMessage(JUtils.color("&6%zones%")
+                        .replace("%zones%", this.zoneManager.getAllZones()));
+                return true;
 
             //Create zone
             case "create":
