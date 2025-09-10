@@ -60,6 +60,10 @@ public class ZoneCommand extends ICommand {
                 }
 
                 final String createName = args.getArgs(1);
+
+                /**
+                 * recovery of positions selected by the player
+                 */
                 final AreaSelector areaSelector = this.zoneManager.getSelectorManager().getSelector(player.getUniqueId());
 
                 if(areaSelector == null){
@@ -77,6 +81,9 @@ public class ZoneCommand extends ICommand {
                     return false;
                 }
 
+                /**
+                 * Create zone
+                 */
                 this.zoneManager.createZone(createName, areaSelector.getArea());
                 player.sendMessage(JUtils.color("&aVous venez de créer la zone %name% avec succès !")
                         .replace("%name%", createName));
@@ -90,6 +97,10 @@ public class ZoneCommand extends ICommand {
                 }
 
                 final String removeName = args.getArgs(1);
+
+                /**
+                 * Check if zone doesn't exist
+                 */
                 if(!this.zoneManager.zoneExists(removeName)){
                     player.sendMessage(JUtils.color("&cLa zone %name% n'existe pas, impossible de la supprimer.")
                             .replace("%name%", removeName));
