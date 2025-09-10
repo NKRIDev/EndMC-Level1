@@ -1,7 +1,11 @@
 package fr.nkri.zone.managers;
 
+import fr.nkri.japi.utils.areas.Area;
 import fr.nkri.zone.managers.selectors.SelectorManager;
 import lombok.Getter;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Getter
 public class ZoneManager {
@@ -17,8 +21,46 @@ public class ZoneManager {
      */
     private final SelectorManager selectorManager;
 
+    /**
+     * lists of created zones associated with
+     * their unique identifiers
+     *
+     * @key zone name
+     * @value zone object
+     */
+    private final Map<String, Zone> zones;
+
     public ZoneManager(){
         INSTANCE = this;
         this.selectorManager = new SelectorManager();
+        this.zones = new HashMap<>();
+    }
+
+    /**
+     * Create a new area
+     *
+     * @param name area name
+     * @param area area cuboid
+     */
+    public void createZone(final String name, final Area area){
+        this.zones.putIfAbsent(name, new Zone(name, area));
+    }
+
+    /**
+     * Removes the area from the map
+     * @param name zone name
+     */
+    public void removeZone(final String name){
+        this.zones.remove(name);
+    }
+
+    /**
+     * Returns whether the zone exists or not
+     *
+     * @param name zone name
+     * @return True or false whether the area exists or not
+     */
+    public boolean zoneExists(final String name){
+        return this.zones.containsKey(name);
     }
 }
