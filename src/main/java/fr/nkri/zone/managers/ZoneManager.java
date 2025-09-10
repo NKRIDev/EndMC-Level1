@@ -39,6 +39,16 @@ public class ZoneManager {
     }
 
     /**
+     * Returns the zone object by name
+     *
+     * @param name zone name
+     * @return zone object
+     */
+    public Zone getZone(final String name){
+        return this.zones.get(name);
+    }
+
+    /**
      * Create a new area
      *
      * @param name area name

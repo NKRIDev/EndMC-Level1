@@ -4,9 +4,12 @@ import fr.nkri.japi.cmds.CommandArguments;
 import fr.nkri.japi.cmds.ICommand;
 import fr.nkri.japi.cmds.interfaces.Command;
 import fr.nkri.japi.utils.JUtils;
+import fr.nkri.zone.managers.Zone;
 import fr.nkri.zone.managers.ZoneManager;
 import fr.nkri.zone.managers.selectors.models.AreaSelector;
 import org.bukkit.entity.Player;
+
+import static sun.audio.AudioPlayer.player;
 
 public class ZoneCommand extends ICommand {
 
@@ -120,6 +123,29 @@ public class ZoneCommand extends ICommand {
                 }
 
                 final String infoName = args.getArgs(1);
+
+                /**
+                 * Area recovery
+                 */
+                final Zone zone = this.zoneManager.getZone(infoName);
+
+                /**
+                 * Check if zone doesn't exist
+                 */
+                if(zone == null){
+                    player.sendMessage(JUtils.color("&cLa zone %name% n'existe pas, impossible de la supprimer.")
+                            .replace("%name%", infoName));
+                    return false;
+                }
+
+                /**
+                 * NOTE: Je ne sais pas quoi mettre pour les informations de la zone.
+                 */
+                player.sendMessage(JUtils.LINE);
+                player.sendMessage(JUtils.color("&eInformation sur la zone &6%name% &e:")
+                        .replace("%name%", zone.getName()));
+                player.sendMessage(JUtils.color("&7..."));
+                player.sendMessage(JUtils.LINE);
                 break;
 
                 //Or else
