@@ -3,6 +3,7 @@ package fr.nkri.zone.managers.selectors.models;
 import fr.nkri.japi.utils.areas.Area;
 import lombok.Getter;
 import lombok.Setter;
+import org.bukkit.Location;
 
 @Getter
 @Setter
@@ -24,26 +25,6 @@ public class AreaSelector {
     }
 
     /**
-     * Sets the 1st position
-     * @param blockX X position of the clicked block
-     * @param blockY Y position of the clicked block
-     */
-    public void posFirst(final double blockX, final double blockY) {
-        final PosSelector selectorFirst = new PosSelector(blockX, blockY);
-        this.selectorFirst = selectorFirst;
-    }
-
-    /**
-     * Sets the 2nd position
-     * @param blockX X position of the clicked block
-     * @param blockY Y position of the clicked block
-     */
-    public void posSecond(final double blockX, final double blockY) {
-        final PosSelector selectorSecond = new PosSelector(blockX, blockY);
-        this.selectorSecond = selectorSecond;
-    }
-
-    /**
      * Know if we can create an arena, if the
      * 2 selectors are correctly selected
      *
@@ -51,5 +32,20 @@ public class AreaSelector {
      */
     public boolean canCreate(){
         return this.selectorFirst != null && this.selectorSecond != null;
+    }
+
+    /**
+     * Create the arena object from the 2 positions
+     * @return the Area object or null if it could not be created
+     */
+    public Area getArea(){
+        if(!canCreate()){
+            return null;
+        }
+
+        final Location locationFirst = this.selectorFirst.getLocation();
+        final Location locationSecond = this.selectorSecond.getLocation();
+
+        return new Area(locationFirst, locationSecond);
     }
 }

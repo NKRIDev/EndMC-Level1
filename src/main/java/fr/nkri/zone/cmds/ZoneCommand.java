@@ -4,6 +4,7 @@ import fr.nkri.japi.cmds.CommandArguments;
 import fr.nkri.japi.cmds.ICommand;
 import fr.nkri.japi.cmds.interfaces.Command;
 import fr.nkri.japi.utils.JUtils;
+import fr.nkri.japi.utils.areas.Area;
 import fr.nkri.zone.managers.Zone;
 import fr.nkri.zone.managers.ZoneManager;
 import fr.nkri.zone.managers.selectors.models.AreaSelector;
@@ -90,7 +91,12 @@ public class ZoneCommand extends ICommand {
                 /**
                  * Create zone
                  */
-                this.zoneManager.createZone(createName, areaSelector.getArea());
+
+                //Create area object
+                final Area area = areaSelector.getArea();
+
+                //add in map
+                this.zoneManager.createZone(createName, area);
                 player.sendMessage(JUtils.color("&aVous venez de créer la zone %name% avec succès !")
                         .replace("%name%", createName));
 

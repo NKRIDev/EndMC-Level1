@@ -46,7 +46,7 @@ public class AreaSelectorEvent implements Listener {
 
         if(e.getAction() == Action.LEFT_CLICK_BLOCK) {
             //Create a pos1
-            final PosSelector pos1 = new PosSelector(clickedBlock.getX(), clickedBlock.getY());
+            final PosSelector pos1 = new PosSelector(clickedBlock.getLocation());
             this.zoneManager.getSelectorManager().setFirstPos(player.getUniqueId(), pos1);
 
             e.setCancelled(true);
@@ -56,7 +56,7 @@ public class AreaSelectorEvent implements Listener {
         }
         else if(e.getAction() == Action.RIGHT_CLICK_BLOCK) {
             //Create a pos2
-            final PosSelector pos2 = new PosSelector(clickedBlock.getX(), clickedBlock.getY());
+            final PosSelector pos2 = new PosSelector(clickedBlock.getLocation());
             this.zoneManager.getSelectorManager().setSecondPos(player.getUniqueId(), pos2);
 
             e.setCancelled(true);

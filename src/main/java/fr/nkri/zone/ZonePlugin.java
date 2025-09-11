@@ -6,6 +6,7 @@ import fr.nkri.zone.cmds.ZoneCommand;
 import fr.nkri.zone.events.AreaSelectorEvent;
 import fr.nkri.zone.managers.ZoneManager;
 import fr.nkri.zone.managers.datas.ZoneData;
+import fr.nkri.zone.managers.runnables.ZoneRunnable;
 import lombok.Getter;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -23,6 +24,12 @@ public class ZonePlugin extends JavaPlugin {
     private ZoneManager zoneManager;
     private ZoneData zoneData;
 
+    /**
+     * Runnalbe that detects the entry and
+     * exit of players in the zones
+     */
+    private ZoneRunnable zoneRunnable;
+
     @Override
     public void onEnable() {
         INSTANCE = this;
@@ -33,6 +40,10 @@ public class ZonePlugin extends JavaPlugin {
         //load data
         this.zoneData = new ZoneData(this, zoneManager);
         this.zoneData.loadZones();
+
+        //Start 'zone runnable'
+        this.zoneRunnable = new ZoneRunnable(zoneManager);
+        this.zoneRunnable.runTaskTimer(this, 20L, 20L);
 
         //register events
         JAPI.getInstance().registerListeners(new AreaSelectorEvent(zoneManager));
@@ -45,5 +56,10 @@ public class ZonePlugin extends JavaPlugin {
     public void onDisable() {
         //save zones
         this.zoneData.saveZones();
+
+        //stop zone runnable
+        if(this.zoneRunnable != null) {
+            this.zoneRunnable.cancel();
+        }
     }
 }

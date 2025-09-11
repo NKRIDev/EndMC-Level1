@@ -2,12 +2,11 @@ package fr.nkri.zone.managers;
 
 import fr.nkri.japi.utils.JUtils;
 import fr.nkri.japi.utils.areas.Area;
+import fr.nkri.zone.managers.runnables.ZoneRunnable;
 import fr.nkri.zone.managers.selectors.SelectorManager;
 import lombok.Getter;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Getter
 public class ZoneManager {
@@ -32,10 +31,19 @@ public class ZoneManager {
      */
     private final Map<String, Zone> zones;
 
+    /**
+     * Player present in an area
+     *
+     * @key player UUID
+     * @value area in which the player is
+     */
+    private final Map<UUID, Set<String>> playersInZone;
+
     public ZoneManager(){
         INSTANCE = this;
         this.selectorManager = new SelectorManager();
         this.zones = new HashMap<>();
+        this.playersInZone = new HashMap<>();
     }
 
     /**
