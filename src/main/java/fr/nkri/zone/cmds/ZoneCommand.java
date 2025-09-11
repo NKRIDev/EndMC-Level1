@@ -22,7 +22,7 @@ public class ZoneCommand extends ICommand {
     public ZoneCommand(ZoneManager zoneManager) {
         this.zoneManager = zoneManager;
     }
-    
+
     @Override
     @Command(name = "zone", permissionNode = "zone.admin", isConsole = false)
     public boolean onCommand(final CommandArguments args) {
