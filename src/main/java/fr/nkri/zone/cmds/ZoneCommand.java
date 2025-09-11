@@ -5,10 +5,14 @@ import fr.nkri.japi.cmds.ICommand;
 import fr.nkri.japi.cmds.interfaces.Command;
 import fr.nkri.japi.utils.JUtils;
 import fr.nkri.japi.utils.areas.Area;
+import fr.nkri.japi.utils.items.ItemBuilder;
 import fr.nkri.zone.managers.Zone;
 import fr.nkri.zone.managers.ZoneManager;
 import fr.nkri.zone.managers.selectors.models.AreaSelector;
+import net.minecraft.server.v1_8_R3.ItemBucket;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import static sun.audio.AudioPlayer.player;
 
@@ -47,7 +51,18 @@ public class ZoneCommand extends ICommand {
         switch (subCommand) {
             //Give item
             case "wand":
-                break;
+                if (JUtils.isInventoryFull(player)){
+                    player.sendMessage(JUtils.color("&cFaite de la place dans votre inventaire pour récupérer l'item."));
+                    return false;
+                }
+
+                final String stackName = "&6&lHâche magique";
+                final ItemStack stack = new ItemBuilder(Material.WOOD_AXE).setName(JUtils.color(stackName)).toItemStack();
+
+                player.getInventory().addItem(stack);
+                player.sendMessage(JUtils.color("&aVous venez de reçevoir la %stack% &r&a!")
+                        .replace("%stack%", JUtils.color(stackName)));
+                return true;
 
             //Zone arrays
             case "list":

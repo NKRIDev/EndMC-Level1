@@ -10,6 +10,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.meta.ItemMeta;
 
 public class AreaSelectorEvent implements Listener {
 
@@ -29,6 +30,19 @@ public class AreaSelectorEvent implements Listener {
         the player must have an axe in hand to create a selector
          */
         if(e.getItem() == null || e.getItem().getType() != Material.WOOD_AXE) {
+            return;
+        }
+
+        if(!e.getItem().hasItemMeta()){
+            return;
+        }
+
+        final ItemMeta meta = e.getItem().getItemMeta();
+        if(meta == null || !meta.hasDisplayName()){
+            return;
+        }
+
+        if (!meta.getDisplayName().equals(JUtils.color("&6&lHâche magique"))){
             return;
         }
 
