@@ -5,6 +5,7 @@ import fr.nkri.japi.cmds.CommandArguments;
 import fr.nkri.zone.cmds.ZoneCommand;
 import fr.nkri.zone.events.AreaSelectorEvent;
 import fr.nkri.zone.managers.ZoneManager;
+import fr.nkri.zone.managers.datas.ZoneData;
 import lombok.Getter;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -20,6 +21,7 @@ public class ZonePlugin extends JavaPlugin {
      * Init managers
      */
     private ZoneManager zoneManager;
+    private ZoneData zoneData;
 
     @Override
     public void onEnable() {
@@ -27,6 +29,10 @@ public class ZonePlugin extends JavaPlugin {
 
         //init managers
         this.zoneManager = new ZoneManager();
+
+        //load data
+        this.zoneData = new ZoneData(this, zoneManager);
+        this.zoneData.loadZones();
 
         //register events
         JAPI.getInstance().registerListeners(new AreaSelectorEvent(zoneManager));
@@ -37,5 +43,7 @@ public class ZonePlugin extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        //save zones
+        this.zoneData.saveZones();
     }
 }

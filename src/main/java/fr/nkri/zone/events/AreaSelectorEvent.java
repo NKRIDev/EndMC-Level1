@@ -39,13 +39,10 @@ public class AreaSelectorEvent implements Listener {
             return;
         }
 
-        /*
-        NOTE : System de permission en commentaire, pour faciliter le test du plugin
-                if(!player.hasPermission("zone.selector")){
+        if(!player.hasPermission("zone.selector")){
             player.sendMessage(JUtils.color("&cErreur : vous n'avez pas la permission d'effectuer cette action."));
             return;
         }
-         */
 
         if(e.getAction() == Action.LEFT_CLICK_BLOCK) {
             //Create a pos1
