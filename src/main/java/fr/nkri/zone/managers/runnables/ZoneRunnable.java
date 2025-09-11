@@ -1,5 +1,8 @@
 package fr.nkri.zone.managers.runnables;
 
+import fr.nkri.japi.utils.JUtils;
+import fr.nkri.zone.events.customs.ZoneEnterEvent;
+import fr.nkri.zone.events.customs.ZoneLeaveEvent;
 import fr.nkri.zone.managers.Zone;
 import fr.nkri.zone.managers.ZoneManager;
 import org.bukkit.Bukkit;
@@ -49,7 +52,8 @@ public class ZoneRunnable extends BukkitRunnable {
              */
             for(String zoneName : currentZones){
                 if(!previousZones.contains(zoneName)){
-                    player.sendMessage("§eEntrer dans la zone: " + zoneName);
+                    //Call a custom bukkit event
+                    JUtils.callEvent(new ZoneEnterEvent(player, this.zoneManager.getZone(zoneName)));
                 }
             }
 
@@ -58,7 +62,8 @@ public class ZoneRunnable extends BukkitRunnable {
              */
             for(String zoneName : previousZones){
                 if(!currentZones.contains(zoneName)){
-                    player.sendMessage("§cSortie de la zone: " + zoneName);
+                    //Call a custom bukkit event
+                    JUtils.callEvent(new ZoneLeaveEvent(player, this.zoneManager.getZone(zoneName)));
                 }
             }
 

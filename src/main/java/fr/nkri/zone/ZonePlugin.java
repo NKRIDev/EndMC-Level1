@@ -4,6 +4,7 @@ import fr.nkri.japi.JAPI;
 import fr.nkri.japi.cmds.CommandArguments;
 import fr.nkri.zone.cmds.ZoneCommand;
 import fr.nkri.zone.events.AreaSelectorEvent;
+import fr.nkri.zone.events.ZoneEvent;
 import fr.nkri.zone.managers.ZoneManager;
 import fr.nkri.zone.managers.datas.ZoneData;
 import fr.nkri.zone.managers.runnables.ZoneRunnable;
@@ -47,6 +48,7 @@ public class ZonePlugin extends JavaPlugin {
 
         //register events
         JAPI.getInstance().registerListeners(new AreaSelectorEvent(zoneManager));
+        JAPI.getInstance().registerListeners(new ZoneEvent(zoneManager));
 
         //register cmds
         JAPI.getInstance().registerCommand(new ZoneCommand(zoneManager));
