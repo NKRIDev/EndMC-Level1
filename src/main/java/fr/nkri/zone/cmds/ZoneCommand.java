@@ -22,10 +22,9 @@ public class ZoneCommand extends ICommand {
     public ZoneCommand(ZoneManager zoneManager) {
         this.zoneManager = zoneManager;
     }
-
-    //Note: pas de permission pour faciliter le test du plugin
+    
     @Override
-    @Command(name = "zone", isConsole = false)
+    @Command(name = "zone", permissionNode = "zone.admin", isConsole = false)
     public boolean onCommand(final CommandArguments args) {
         final Player player = args.getPlayer();
 
