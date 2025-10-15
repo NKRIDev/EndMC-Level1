@@ -12,12 +12,6 @@ import java.util.*;
 public class ZoneManager {
 
     /**
-     * Instance of area manager
-     */
-    @Getter
-    private static ZoneManager INSTANCE;
-
-    /**
      * Manages the area definition part
      */
     private final SelectorManager selectorManager;
@@ -40,7 +34,6 @@ public class ZoneManager {
     private final Map<UUID, Set<String>> playersInZone;
 
     public ZoneManager(){
-        INSTANCE = this;
         this.selectorManager = new SelectorManager();
         this.zones = new HashMap<>();
         this.playersInZone = new HashMap<>();

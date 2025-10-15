@@ -24,9 +24,9 @@ public class ZoneEvent implements Listener {
 
     //Player enter in zone
     @EventHandler
-    public void onPlayerEnterZone(final ZoneEnterEvent e){
-        final Player player = e.getPlayer();
-        final Zone zone = e.getZone();
+    public void onPlayerEnterZone(final ZoneEnterEvent event){
+        final Player player = event.getPlayer();
+        final Zone zone = event.getZone();
 
         player.sendMessage(JUtils.color("&aVous venez de &e&lrentrer &r&adans la zone %name%")
                 .replace("%name%", zone.getName()));
@@ -34,19 +34,19 @@ public class ZoneEvent implements Listener {
 
     //Player leave zone
     @EventHandler
-    public void onPlayerQuitZone(final ZoneLeaveEvent e){
-        final Player player = e.getPlayer();
-        final Zone zone = e.getZone();
+    public void onPlayerQuitZone(final ZoneLeaveEvent event){
+        final Player player = event.getPlayer();
+        final Zone zone = event.getZone();
 
         player.sendMessage(JUtils.color("&cVous venez de &e&lsortir &r&cde la zone %name%")
                 .replace("%name%", zone.getName()));
     }
 
     @EventHandler
-    public void onQuit(final PlayerQuitEvent e){
+    public void onQuit(final PlayerQuitEvent event){
         /**
          * Delete to make cache space
          */
-        this.zoneManager.getPlayersInZone().remove(e.getPlayer().getUniqueId());
+        this.zoneManager.getPlayersInZone().remove(event.getPlayer().getUniqueId());
     }
 }

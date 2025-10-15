@@ -25,19 +25,19 @@ public class AreaSelectorEvent implements Listener {
     }
 
     @EventHandler
-    public void onPlayerInteract(final PlayerInteractEvent e) {
+    public void onPlayerInteract(final PlayerInteractEvent event) {
         /*
         the player must have an axe in hand to create a selector
          */
-        if(e.getItem() == null || e.getItem().getType() != Material.WOOD_AXE) {
+        if(event.getItem() == null || event.getItem().getType() != Material.WOOD_AXE) {
             return;
         }
 
-        if(!e.getItem().hasItemMeta()){
+        if(!event.getItem().hasItemMeta()){
             return;
         }
 
-        final ItemMeta meta = e.getItem().getItemMeta();
+        final ItemMeta meta = event.getItem().getItemMeta();
         if(meta == null || !meta.hasDisplayName()){
             return;
         }
@@ -46,8 +46,8 @@ public class AreaSelectorEvent implements Listener {
             return;
         }
 
-        final Player player = e.getPlayer();
-        final Block clickedBlock = e.getClickedBlock();
+        final Player player = event.getPlayer();
+        final Block clickedBlock = event.getClickedBlock();
 
         if(clickedBlock == null) {
             return;
@@ -58,22 +58,22 @@ public class AreaSelectorEvent implements Listener {
             return;
         }
 
-        if(e.getAction() == Action.LEFT_CLICK_BLOCK) {
+        if(event.getAction() == Action.LEFT_CLICK_BLOCK) {
             //Create a pos1
             final PosSelector pos1 = new PosSelector(clickedBlock.getLocation());
             this.zoneManager.getSelectorManager().setFirstPos(player.getUniqueId(), pos1);
 
-            e.setCancelled(true);
+            event.setCancelled(true);
             player.sendMessage(JUtils.color("&7[&6&lSELECTOR&7&l] &r&aPos 1 définit en X: %x% - Y: %y%")
                     .replace("%x%", String.valueOf(pos1.getBlockX()))
                     .replace("%y%", String.valueOf(pos1.getBlockY())));
         }
-        else if(e.getAction() == Action.RIGHT_CLICK_BLOCK) {
+        else if(event.getAction() == Action.RIGHT_CLICK_BLOCK) {
             //Create a pos2
             final PosSelector pos2 = new PosSelector(clickedBlock.getLocation());
             this.zoneManager.getSelectorManager().setSecondPos(player.getUniqueId(), pos2);
 
-            e.setCancelled(true);
+            event.setCancelled(true);
             player.sendMessage(JUtils.color("&7[&6&lSELECTOR&7&l] &r&aPos 2 définit en X: %x% - Y: %y%")
                     .replace("%x%", String.valueOf(pos2.getBlockX()))
                     .replace("%y%", String.valueOf(pos2.getBlockY())));

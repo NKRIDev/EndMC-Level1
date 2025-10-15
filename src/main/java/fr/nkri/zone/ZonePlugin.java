@@ -17,7 +17,7 @@ public class ZonePlugin extends JavaPlugin {
      * Instance of the main class
      */
     @Getter
-    private static ZonePlugin INSTANCE;
+    private static ZonePlugin instance;
 
     /**
      * Init managers
@@ -33,7 +33,7 @@ public class ZonePlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        INSTANCE = this;
+        instance = this;
 
         //init managers
         this.zoneManager = new ZoneManager();

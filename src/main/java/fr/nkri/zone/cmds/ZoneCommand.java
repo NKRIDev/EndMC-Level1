@@ -19,7 +19,7 @@ import static sun.audio.AudioPlayer.player;
 public class ZoneCommand extends ICommand {
 
     private final ZoneManager zoneManager;
-    public ZoneCommand(ZoneManager zoneManager) {
+    public ZoneCommand(final ZoneManager zoneManager) {
         this.zoneManager = zoneManager;
     }
 
